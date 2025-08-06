@@ -9,8 +9,8 @@ const config = require('../config');
 function createDriver() {
     const options = new firefox.Options();
     if (process.env.GITHUB_ACTIONS) {
-        // В GitHub Actions явно указываем путь к Snap-версии Firefox
-        options.setBinary('/snap/bin/firefox');
+        // В GitHub Actions явно указываем путь
+        options.setBinary('/usr/bin/firefox');
     }
     // В локальном запуске не меняем бинарь, используем браузер из конфига
     return new Builder()
