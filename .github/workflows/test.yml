@@ -1,4 +1,4 @@
-name: Node.js CI - Run Tests on PR
+name: Node.js CI - Run Selenium Tests with Firefox
 
 on:
   pull_request:
@@ -10,20 +10,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: '22'
 
-      - name: Install Firefox
-        run: sudo apt-get update && sudo apt-get install -y firefox
+      - name: Install dependencies
+        run: npm install
 
-      - name: Setup geckodriver
-        uses: mozilla/geckodriver@v1
-        with:
-          version: latest
+      - name: Install Firefox (just to be sure)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y firefox
 
-      - run: npm install
+      - name: Install geckodriver
+        run: |
+          GECKO_VERSION="v0.33.0"
+          wget https://github.com/mozilla/geckodriver/releases/download/$GECKO_VERSION/geckodriver-$GECKO_VERSION-linux64.tar.gz
+          tar -xzf geckodriver-$GECKO_VERSION-linux64.tar.gz
+          sudo mv geckodriver /usr/local/bin/
+          geckodriver --version
 
-      - run: npm test
+      - name: Run tests
+        run: npm test
