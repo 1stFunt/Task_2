@@ -20,7 +20,7 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y firefox
 
       - name: Setup geckodriver
-        uses: mozilla/geckodriver@v2.0.0
+        uses: mozilla/geckodriver@v1
         with:
           version: latest
 
