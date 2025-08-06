@@ -18,8 +18,13 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Install Firefox and geckodriver
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y firefox geckodriver
+
       - name: Install dependencies
         run: npm install
 
-      - name: Run tests (headless)
+      - name: Run tests
         run: npm test
