@@ -10,8 +10,8 @@ function createDriver() {
     const options = new firefox.Options();
     // В CI (GitHub Actions) запускаем Firefox в headless режиме, так как там нет GUI
     if (process.env.GITHUB_ACTIONS) {
-        options.setBinary('/usr/bin/firefox');
-        options.headless();
+        options.setBinary('/usr/bin/firefox'); // или /snap/bin/firefox в зависимости от окружения
+        options.addArguments('-headless'); // включаем headless в CI
     }
     // В локальном запуске не меняем бинарь, используем браузер из конфига
     return new Builder()
