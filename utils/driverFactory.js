@@ -10,7 +10,7 @@ function createDriver() {
     if (process.env.GITHUB_ACTIONS) {
         // В GitHub Actions явно указываем путь к Firefox (установленному из PPA)
         const options = new firefox.Options();
-        options.setBinary('/usr/bin/firefox');
+        options.setBinary('/snap/bin/firefox');
 
         return new Builder()
             .forBrowser(config.browser)
