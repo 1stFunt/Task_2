@@ -10,21 +10,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: '22'
 
-      - name: Install Firefox and geckodriver
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y firefox geckodriver
+      - name: Install Firefox
+        run: sudo apt-get update && sudo apt-get install -y firefox
 
-      - name: Install dependencies
-        run: npm install
+      - name: Setup geckodriver
+        uses: mozilla/geckodriver@v2.0.0
+        with:
+          version: latest
 
-      - name: Run tests
-        run: npm test
+      - run: npm install
+
+      - run: npm test
