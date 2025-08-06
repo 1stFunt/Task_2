@@ -18,6 +18,9 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Install dependencies
+        run: npm install
+
       - name: Remove snap Firefox and install Firefox from PPA
         run: |
           sudo snap remove firefox || true
