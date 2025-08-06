@@ -21,14 +21,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Remove snap Firefox and install Firefox from PPA
-        run: |
-          sudo snap remove firefox || true
-          sudo add-apt-repository -y ppa:mozillateam/ppa
-          sudo apt-get update
-          sudo apt-get install -y firefox
-
-      - name: Check Firefox binary path
+      - name: Check Firefox binary path (Snap)
         run: which firefox
 
       - name: Check Firefox version

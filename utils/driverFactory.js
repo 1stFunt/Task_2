@@ -7,19 +7,16 @@ const config = require('../config');
  * @returns {import('selenium-webdriver').WebDriver}
  */
 function createDriver() {
+    const options = new firefox.Options();
     if (process.env.GITHUB_ACTIONS) {
-        // В GitHub Actions явно указываем путь к Firefox (установленному из PPA)
-        const options = new firefox.Options();
+        // В GitHub Actions явно указываем путь к Snap-версии Firefox
         options.setBinary('/snap/bin/firefox');
-
-        return new Builder()
-            .forBrowser(config.browser)
-            .setFirefoxOptions(options)
-            .build();
-    } else {
-        // Локальный запуск — просто браузер из конфига
-        return new Builder().forBrowser(config.browser).build();
     }
+    // В локальном запуске не меняем бинарь, используем браузер из конфига
+    return new Builder()
+        .forBrowser(config.browser)
+        .setFirefoxOptions(options)
+        .build();
 }
 
 module.exports = { createDriver };
