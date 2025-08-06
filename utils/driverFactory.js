@@ -8,9 +8,10 @@ const config = require('../config');
  */
 function createDriver() {
     const options = new firefox.Options();
+    // В CI (GitHub Actions) запускаем Firefox в headless режиме, так как там нет GUI
     if (process.env.GITHUB_ACTIONS) {
-        // В GitHub Actions явно указываем путь
         options.setBinary('/usr/bin/firefox');
+        options.headless();
     }
     // В локальном запуске не меняем бинарь, используем браузер из конфига
     return new Builder()
