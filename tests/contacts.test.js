@@ -40,7 +40,7 @@ async function test1() {
     }
 }
 
-// Тест 2: Проверка структуры первого офисного блока
+// Тест 2: Проверка структуры офисного блока
 async function test2() {
     const { driver, contactPage } = await beforeEach();
     try {
